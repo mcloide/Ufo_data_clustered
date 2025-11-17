@@ -60,7 +60,7 @@ They are included because they were already part of the cleaned file.
 📝 Field Reference
 
 Each row has the following structure (example):
-{
+
   "uid": "scrubbed/row327047",
   "t_utc": "2013-09-09T09:51:00.000Z",
   "lat": 32.7152778,
@@ -80,21 +80,36 @@ Each row has the following structure (example):
   "nearest_airport_code": "KSAN",
   "reports_z": null,
   "wx_bucket": "unknown"
-}
+
 
 Field descriptions
+
 Field	Type	Notes
+
 uid	string	Stable row identifier
+
 t_utc	string	Event timestamp, ISO-8601 UTC
+
 lat, lon	float	Approximate coordinates
+
 city, state, country	string	Cleaned location fields (best-effort)
+
 text	string	Free-text sighting description
+
 src	string	Original Kaggle dataset source
+
 cluster_id	int	Text-similarity cluster (for research use only)
+
 prob	float	Cluster membership probability
+
 moon_illum	float	Moon illumination (0–1)
+
 moon_alt_deg	float	Moon altitude in degrees
+
 nearest_airport_km	float	Distance to nearest airport
+
 nearest_airport_code	string	ICAO code
+
 wx_bucket	string	Approximate weather category
+
 reports_z	float/null	Unused placeholder field (kept for completeness)
