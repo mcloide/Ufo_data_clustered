@@ -1,3 +1,29 @@
+---
+datasets:
+  - kaggle
+language:
+  - en
+task_categories:
+  - text-classification
+  - text-retrieval
+  - time-series-forecasting
+pretty_name: "UFO Sightings Unified Semantic Dataset"
+size_categories:
+  - 100K<n<1M
+license: mit
+tags:
+  - ufo
+  - ufology
+  - anomalous-phenomena
+  - embeddings
+  - hdbscan
+  - semantic-search
+  - cluster-analysis
+  - dataset
+  - geospatial
+  - moon-illumination
+  - aviation
+---
 # **UFO Sightings – Cleaned & Unified Dataset (~327k rows)**
 
 This dataset merges several publicly available UFO sighting datasets from Kaggle into one **cleaned**, **standardized**, and **enriched** file.
