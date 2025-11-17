@@ -60,3 +60,41 @@ They are included because they were already part of the cleaned file.
 📝 Field Reference
 
 Each row has the following structure (example):
+{
+  "uid": "scrubbed/row327047",
+  "t_utc": "2013-09-09T09:51:00.000Z",
+  "lat": 32.7152778,
+  "lon": -117.1563889,
+  "text": "2 white lights zig-zag over Qualcomm Stadium...",
+  "src": "scrubbed",
+  "city": "san diego",
+  "state": "ca",
+  "country": "US",
+
+  "cluster_id": 725,
+  "prob": 1.0,
+
+  "moon_illum": 0.163603127,
+  "moon_alt_deg": -67.0003509521,
+  "nearest_airport_km": 3.7174715996,
+  "nearest_airport_code": "KSAN",
+  "reports_z": null,
+  "wx_bucket": "unknown"
+}
+
+Field descriptions
+Field	Type	Notes
+uid	string	Stable row identifier
+t_utc	string	Event timestamp, ISO-8601 UTC
+lat, lon	float	Approximate coordinates
+city, state, country	string	Cleaned location fields (best-effort)
+text	string	Free-text sighting description
+src	string	Original Kaggle dataset source
+cluster_id	int	Text-similarity cluster (for research use only)
+prob	float	Cluster membership probability
+moon_illum	float	Moon illumination (0–1)
+moon_alt_deg	float	Moon altitude in degrees
+nearest_airport_km	float	Distance to nearest airport
+nearest_airport_code	string	ICAO code
+wx_bucket	string	Approximate weather category
+reports_z	float/null	Unused placeholder field (kept for completeness)
