@@ -1,0 +1,155 @@
+This dataset is not raw UFO reports — it’s a *processed, enriched, semantically-clustered corpus* designed for large-scale analysis.
+Below is the exact pipeline used.
+
+---
+
+# **🧠 1. Embeddings (Semantic Encoding)**
+
+All reports were embedded using:
+
+**Model:** `BAAI/bge-large-en-v1.5`
+**Dimensionality:** 1024
+
+Embeddings capture meaning (not keywords), allowing similar descriptions to cluster even with different phrasing, spelling, or vocabulary.
+
+---
+
+# **📉 2. Dimensionality Reduction (UMAP → 15D)**
+
+High-dimensional vectors were reduced using:
+
+**UMAP(n_components=15, metric='cosine')**
+
+Reasons for UMAP-15:
+
+* preserves local/global structure
+* reduces noise
+* improves cluster separation
+* makes density-based clustering stable
+
+---
+
+# **📍 3. Density Clustering (HDBSCAN)**
+
+Reports were grouped using:
+
+**HDBSCAN(min_cluster_size≈tuned, min_samples≈tuned)**
+
+Outputs include:
+
+* `cluster_id` (−1 = noise)
+* `prob` (cluster stability score)
+* ~3.7k clusters
+* ~20% noise
+
+HDBSCAN discovers meaningful themes like:
+
+* recurring object behaviors
+* atmospheric misidentifications
+* military-adjacent patterns
+* long-term witness motif clusters
+* hoax/storytelling clusters
+* nonsensical/noise clusters
+
+---
+
+# **🔍 4. Sparse Retrieval (BM25) — Used for QA, Not in the Dataset**
+
+A **BM25 index was built during preprocessing** to assist in quality control:
+
+BM25 was used to:
+
+* sanity-check embedding clusters
+* inspect keyword cohesion
+* identify outliers / mislabeled points
+* verify that HDBSCAN clusters were semantically coherent
+* detect keyword drift within large clusters
+
+**Important:**
+The *BM25 scores and index are **not included** in the final dataset.*
+BM25 influenced the cleaning stage but is not part of the exported fields.
+
+
+---
+
+# **🌕 5. Sidecar Feature Enrichment**
+
+Each record includes enriched metadata:
+
+### **Moon illumination & altitude**
+
+* `moon_illum`
+* `moon_alt_deg`
+  Computed from timestamp + lat/lon.
+
+### **Nearest airport (US/CA/GB accuracy strongest)**
+
+* `nearest_airport_km`
+* `nearest_airport_code`
+  Computed via geospatial lookup.
+
+### **Weather bucket**
+
+* `wx_bucket` (high-level NOAA-based label, imperfect)
+
+### **Timestamp normalization**
+
+* `ts` = Unix epoch (ms)
+
+### **Source tagging**
+
+* `src` indicates which Kaggle dataset the row came from.
+
+---
+
+# **📚 6. Canonical Output Format**
+
+Each JSONL entry looks like:
+
+```
+{
+  "uid": ...,
+  "t_utc": ...,
+  "lat": ...,
+  "lon": ...,
+  "text": ...,
+  "src": ...,
+
+  "city": ...,
+  "state": ...,
+  "country": ...,    
+
+  "cluster_id": ...,
+  "prob": ...,
+
+  "moon_illum": ...,
+  "moon_alt_deg": ...,
+
+  "nearest_airport_km": ...,
+  "nearest_airport_code": ...,
+
+  "wx_bucket": ...,
+  "ts": ...
+}
+```
+
+---
+
+# **📌 What This Dataset *Is***
+
+✔️ A semantically-clustered UFO corpus
+✔️ Enriched with astronomy + geospatial + weather sidecars
+✔️ Cleaned, deduped, normalized
+✔️ Built using modern ML (BGE+UMAP+HDBSCAN)
+✔️ Ready for search, visualization, mapping, temporal analysis
+✔️ Distributed without interpretation or claims
+
+---
+
+# **📌 What This Dataset *Is Not***
+
+❌ Not a curated list of “important” sightings
+❌ Not opinionated — no inferences built in
+❌ Not a proof of anything
+❌ Not filtered toward any outcome
+❌ Does not include BM25 scores (BM25 was QA-only)
