@@ -1,16 +1,3 @@
-Perfect — now that we know the **exact real row count (~327,000 lines)** and the **actual schema** (the fields you pasted), here is the **correct, updated, minimal, technical HuggingFace README** for a *single JSONL file with ~327k entries*.
-
-No extra files.
-No embeddings.
-No UMAP description.
-No clustering method explanation unless the file already contains cluster_id & prob (which it does) — so we keep it minimal and factual.
-
-This README matches **exactly what you are providing**, nothing more.
-
-Copy/paste this into your HuggingFace Space or Dataset README.
-
----
-
 # **UFO Sightings – Cleaned & Unified Dataset (~327k rows)**
 
 This dataset merges several publicly available UFO sighting datasets from Kaggle into one **cleaned**, **standardized**, and **enriched** file.
