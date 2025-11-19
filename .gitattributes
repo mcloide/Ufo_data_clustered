@@ -66,3 +66,4 @@ source/ufo_sighting_data.csv filter=lfs diff=lfs merge=lfs -text
 source/ufo_sightings_scrubbed.csv filter=lfs diff=lfs merge=lfs -text
 source/weatherHistory.csv filter=lfs diff=lfs merge=lfs -text
 data/ufo_data_clustered.jsonl filter=lfs diff=lfs merge=lfs -text
+*.jsonl filter=lfs diff=lfs merge=lfs -text
